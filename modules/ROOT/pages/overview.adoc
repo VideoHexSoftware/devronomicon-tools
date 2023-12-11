@@ -1,4 +1,4 @@
 = Tools
-:navtitle: Tools
+:navtitle: Overview
 
 Coming soon
