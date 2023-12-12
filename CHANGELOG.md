@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.2.0...v0.3.0) (2023-12-12)
+
+
+### Features
+
+* write docs on eslint ([3135e04](https://github.com/VideoHexSoftware/devronomicon-tools/commit/3135e0444d8d064868e7c6a246caba13205bb857))
+
 # [0.2.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.1.0...v0.2.0) (2023-12-12)
 
 
