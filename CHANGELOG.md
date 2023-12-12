@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.4.0...v0.5.0) (2023-12-12)
+
+
+### Features
+
+* update typescript-eslint config some more ([abd806f](https://github.com/VideoHexSoftware/devronomicon-tools/commit/abd806fa30229fb099d0579baeac9f0c35e22b6b))
+
 # [0.4.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.3.0...v0.4.0) (2023-12-12)
 
 
