@@ -13,7 +13,7 @@
           "replacements": [
             {
               "files": [
-                "docs/antora.yml"
+                "antora.yml"
               ],
               "from": "version: .*",
               "to": "version: ${nextRelease.version}",
