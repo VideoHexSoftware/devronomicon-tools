@@ -1,3 +1,341 @@
 = ESLint
 
-Coming soon
+A linter for Javascript, not to be confused with a formatter (Prettier).
+
+== Context
+
+A new Next.js 14 project with ESLint enabled
+
+== Starting Configuration
+
+.eslint.json
+[source,json]
+----
+{
+  "extends": "next/core-web-vitals"
+}
+----
+
+The link:https://eslint.org/docs/latest/use/configure/configuration-files#extending-configuration-files[extends] keyword imports a configuration from a package. In this example, we're bringing in a configuration called `core-web-vitals` from the package `next`.
+
+=== What rules are in next/core-web-vitals?
+
+The link:https://nextjs.org/docs/pages/building-your-application/configuring/eslint#core-web-vitals[documentation] has this to say about it. Appears to be related to a link:https://web.dev/articles/vitals[larger Google initiative]. But this doesn't tell us what we can actually use in this config file right now.
+
+The best way I've found to see this is to inspect the link:https://github.com/vercel/next.js/blob/canary/packages/eslint-plugin-next/src/index.ts[eslint-plugin-next source code].
+
+Inside this `module.exports` is two keys, `rules` and `configs`. The `rules` section is actually exporting the rules themselves to the package. The `configs` section is referencing the rules exported above by prefixing them with the package name, in this case `@next/next`.
+
+We can then see exactly what `core-web-vitals` provides for us:
+[source,javascript]
+----
+'core-web-vitals': {
+      plugins: ['@next/next'],
+      extends: ['plugin:@next/next/recommended'],
+      rules: {
+        '@next/next/no-html-link-for-pages': 'error',
+        '@next/next/no-sync-scripts': 'error',
+      },
+    },
+----
+
+Notice here how `plguins` is populated, and the `extends` key is prefixed with `plugin:`. When the package handles these details, that means we don't have to use the `plugin` reference in our own configuration. Not all plugins handle this for us, which is why some need `plugin:` and some do not.
+
+We can now see the list of rules available, and their default values.
+
+==== next/core-web-vitals rules reference
+[source,javascript]
+----
+'@next/next/google-font-display': 'warn',
+'@next/next/google-font-preconnect': 'warn',
+'@next/next/next-script-for-ga': 'warn',
+'@next/next/no-async-client-component': 'warn',
+'@next/next/no-before-interactive-script-outside-document': 'warn',
+'@next/next/no-css-tags': 'warn',
+'@next/next/no-head-element': 'warn',
+'@next/next/no-html-link-for-pages': 'warn',
+'@next/next/no-img-element': 'warn',
+'@next/next/no-page-custom-font': 'warn',
+'@next/next/no-styled-jsx-in-document': 'warn',
+'@next/next/no-sync-scripts': 'warn',
+'@next/next/no-title-in-document-head': 'warn',
+'@next/next/no-typos': 'warn',
+'@next/next/no-unwanted-polyfillio': 'warn',
+'@next/next/inline-script-id': 'error',
+'@next/next/no-assign-module-variable': 'error',
+'@next/next/no-document-import-in-page': 'error',
+'@next/next/no-duplicate-head': 'error',
+'@next/next/no-head-import-in-document': 'error',
+'@next/next/no-script-component-in-head': 'error',
+----
+
+You can also run eslint on the project now:
+[source,bash]
+----
+npx eslint . --fix
+----
+
+== Install Prettier
+
+Now that we have the base configuration figured out, let's add Prettier next. This is probably the main thing you'd want that's not already configured out of the box.
+
+The link:https://nextjs.org/docs/pages/building-your-application/configuring/eslint#prettier[Next.js docs] show to run the following command:
+[source, bash]
+----
+npm install --save-dev eslint-config-prettier
+----
+
+And then extend prettier at the end of your exlint extends values:
+[source,json]
+----
+{
+  "extends": [
+    "next/core-web-vitals", 
+    "prettier"]
+}
+----
+
+=== What is eslint-config-prettier?
+
+link:https://github.com/prettier/eslint-config-prettier[eslint-config-prettier] is a link:https://eslint.org/docs/latest/extend/shareable-configs[shareable configuration] for `eslint` that disables rules that conflict with prettier.
+
+What may not be immediately clear at this moment is that installing this configuration does *not* install prettier in your project. It only installs the eslint configuration to allow them to work together. You will still need to link:https://prettier.io/docs/en/install.html[install prettier] using this command:
+[source,bash]
+----
+npm install --save-dev --save-exact prettier
+----
+
+Then you'll need to add a `.prettierrc`:
+[source,bash]
+----
+node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+----
+
+You can now run prettier on the project:
+[source,bash]
+----
+npx prettier . --write
+----
+
+=== Why not install eslint-plugin-prettier?
+
+If you've read about link:https://eslint.org/docs/latest/use/configure/plugins#naming-convention[ESLint plugins] then you might be wondering why we don't install link:https://github.com/prettier/eslint-plugin-prettier[eslint-plugin-prettier]?
+
+The reason is because installing Prettier this way causes it to run as a set of rules in ESLint rather than as a standalone tool, which is considered less than ideal. The Prettier docs link:https://prettier.io/docs/en/integrating-with-linters.html#notes[talk about this] and there's also link:https://youtu.be/sSJBeWPIipQ?si=go9GzeHil1gYwA7F[a great talk] that discusses why these two activities should be treated separately.
+
+== Install typescript-eslint
+
+Now that Prettier is installed, the next thing we probably want is `typescript-eslint`. This is the tooling that enables ESLint and Prettier to support Typescript.
+
+Assuming you already have eslint and typescript installed:
+
+[source,bash]
+----
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
+----
+
+And then update your `.eslintrc.json`:
+
+[source,json]
+----
+{
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended","prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true
+}
+----
+
+Notice our new `extends` rules goes in the middle. We always want to keep `prettier` at the end.
+
+The link:https://typescript-eslint.io/getting-started#details[typescript-eslint getting started] docs explain these new config keys perfectly so I won't repeat it here.
+
+=== A little fancier
+
+We can improve this by configuring an ESLint link:https://eslint.org/docs/latest/use/configure/configuration-files#how-do-overrides-work[override]. Since these new rules only work on Typescript files, we can configure ESLint to only run them on Typescript files, by updating our configuration:
+[source,json]
+----
+{
+  "extends": [
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "files": [
+        "**/*.{ts,tsx}"
+      ],
+      "parserOptions": {
+        "tsconfigRootDir": ".",
+        "project": [
+          "./tsconfig.json"
+        ]
+      }
+    }
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "root": true
+}
+----
+
+Thanks to Josh Goldberg for providing link:https://github.com/JoshuaKGoldberg/linting-typescript-in-2023/blob/main/.eslintrc.cjs[the file] that I learned this from.
+
+== Install eslint-plugin-simple-import-sort
+
+link:https://github.com/lydell/eslint-plugin-simple-import-sort#readme[This] is the last one that I would consider somewhat essential, because who wants junked up imports in their files, right?
+[source,bash]
+----
+npm install --save-dev eslint-plugin-simple-import-sort
+----
+
+Then add `"simple-import-sort"` to your `plugins`:
+[source,json]
+----
+{
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort"
+  ]
+}
+----
+
+Then we have a new step. This plugin doesn't provide any predefined configurations, so we must configure the rules explicitly:
+[source,json]
+----
+{
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  }
+}
+----
+
+=== Our config file so far
+
+At this point, your config file should look like this:
+[source,json]
+----
+{
+  "extends": [
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "files": [
+        "**/*.{ts,tsx}"
+      ],
+      "parserOptions": {
+        "tsconfigRootDir": ".",
+        "project": [
+          "./tsconfig.json"
+        ]
+      }
+    }
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort"
+  ],
+  "root": true,
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  }
+}
+----
+
+This is probably good enough to get to work with, but I'll hit on one more plugin to wrap things up.
+
+== Install eslint-plugin-typescript-sort-keys
+
+This last plugin does some key sorting in Typescript, if there was one on this list you could consider optional, this would be it (that's why it's last).
+
+Make the following changes to your configuration:
+[source,bash]
+----
+npm install --save-dev eslint-plugin-typescript-sort-keys
+----
+
+[source,json]
+----
+"plugins": [
+    "@typescript-eslint",
+    "simple-import-sort",
+    "typescript-sort-keys"
+  ],
+----
+
+[source,json]
+----
+"extends": [
+    "next/core-web-vitals",
+    "plugin:typescript-sort-keys/recommended",
+    "prettier"
+  ],
+----
+
+=== The tl;dr
+
+Copy this file into the root of your project:
+
+`.eslintrc.json`
+[source,json]
+----
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:typescript-sort-keys/recommended",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "files": [
+        "**/*.{ts,tsx}"
+      ],
+      "parserOptions": {
+        "tsconfigRootDir": ".",
+        "project": [
+          "./tsconfig.json"
+        ]
+      }
+    }
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort"
+  ],
+  "root": true,
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  }
+}
+----
+
+Run these commands:
+[source,bash]
+----
+npm install --save-dev eslint-config-prettier prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-simple-import-sort eslint-plugin-typescript-sort-keys
+----
+[source,bash]
+----
+node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+----
