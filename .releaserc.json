@@ -19,7 +19,7 @@
               "to": "version: ${nextRelease.version}",
               "results": [
                 {
-                  "file": "docs/antora.yml",
+                  "file": "antora.yml",
                   "hasChanged": true,
                   "numMatches": 1,
                   "numReplacements": 1
@@ -42,7 +42,7 @@
         {
           "assets": [
             "CHANGELOG.md",
-            "docs/antora.yml"
+            "antora.yml"
           ]
         }
       ],
