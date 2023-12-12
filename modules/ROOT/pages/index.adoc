@@ -1,4 +1,6 @@
 = Overview
 :navtitle: Overview
 
-Coming soon
+This section contains my personal notes on understanding and working with various tools. A tool in this context is defined as an application that's not a framework. We'll see how long that definition holds up.
+
+This is an early and experimental effort, so I'm just going to start with what I'm working on right now and go from there.
