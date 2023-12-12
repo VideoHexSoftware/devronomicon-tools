@@ -164,7 +164,7 @@ We can improve this by configuring an ESLint link:https://eslint.org/docs/latest
     {
       "extends": [
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended-type-checked"
       ],
       "files": [
         "**/*.{ts,tsx}"
@@ -231,7 +231,7 @@ At this point, your config file should look like this:
     {
       "extends": [
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended-type-checked"
       ],
       "files": [
         "**/*.{ts,tsx}"
