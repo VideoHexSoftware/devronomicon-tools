@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.5.0...v0.5.1) (2023-12-13)
+
+
+### Bug Fixes
+
+* **eslint:** fix typo ([465cded](https://github.com/VideoHexSoftware/devronomicon-tools/commit/465cded0f4240141d1e1881ec7f42755bd92ee1c))
+
 # [0.5.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.4.0...v0.5.0) (2023-12-12)
 
 

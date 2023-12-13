@@ -1,6 +1,6 @@
 name: tools
 title: Tools
-version: 0.5.0
+version: 0.5.1
 asciidoc:
   attributes:
     source-language: asciidoc@
