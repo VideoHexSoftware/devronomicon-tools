@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.8.0...v0.9.0) (2023-12-13)
+
+
+### Features
+
+* **webstorm:** add hotkeys page ([91d5d9d](https://github.com/VideoHexSoftware/devronomicon-tools/commit/91d5d9d7f4c9fb32d4c807ea83fcf38cf3d13d3f))
+
 # [0.8.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.7.0...v0.8.0) (2023-12-13)
 
 
