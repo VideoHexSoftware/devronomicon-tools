@@ -1,2 +1,3 @@
 * xref:webstorm.adoc[]
 ** xref:webstorm-config.adoc[]
+** xref:webstorm-hotkeys.adoc[]

@@ -1,0 +1,16 @@
+= Hotkeys
+
+== Open Settings
+`Ctrl + Alt + S`
+
+== Select the thing the cursor is inside of (element, etc.)
+`Ctrl + W` (may need more than once)
+
+== Surround with (array, etc.)
+`Ctrl + Alt + T`
+
+== Open Terminal
+`Alt + F12`
+
+== Format code
+`Ctrl + Alt + L`
