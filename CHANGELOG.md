@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.5.1...v0.6.0) (2023-12-13)
+
+
+### Features
+
+* **webstorm:** add webstorm page ([5bbc45e](https://github.com/VideoHexSoftware/devronomicon-tools/commit/5bbc45e3ba63b0bfa74e8a7048acc70331877ab9))
+
 ## [0.5.1](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.5.0...v0.5.1) (2023-12-13)
 
 
