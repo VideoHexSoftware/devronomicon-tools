@@ -39,7 +39,7 @@ We can then see exactly what `core-web-vitals` provides for us:
     },
 ----
 
-Notice here how `plguins` is populated, and the `extends` key is prefixed with `plugin:`. When the package handles these details, that means we don't have to use the `plugin` reference in our own configuration. Not all plugins handle this for us, which is why some need `plugin:` and some do not.
+Notice here how `plugins` is populated, and the `extends` key is prefixed with `plugin:`. When the package handles these details, that means we don't have to use the `plugin` reference in our own configuration. Not all plugins handle this for us, which is why some need `plugin:` and some do not.
 
 We can now see the list of rules available, and their default values.
 
