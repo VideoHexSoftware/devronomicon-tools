@@ -1,1 +1,2 @@
 * xref:webstorm.adoc[]
+** xref:webstorm-config.adoc[]
