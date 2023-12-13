@@ -1,3 +1,11 @@
 = Config
 
-Coming soon.
+Settings => Appearance & Behavior => System Settings => Default project directory
+
+Settings => Languages & Frameworks => JavaScript => Code Quality Tools => ESLint => Run eslint –fix on save (checked)
+
+Settings => Languages & Frameworks => JavaScript => Prettier => Automatic Prettier configuration (checked), Run on save (checked)
+
+Settings => Languages & Frameworks => Node.js => Coding assistance for Node.js (checked)
+
+Settings => Tools => Terminal => Shell path: C:\Program Files\Git\bin\bash.exe, Default tab name: git-bash, Copy to clipboard on selection is checked
