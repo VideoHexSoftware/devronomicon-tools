@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.7.0...v0.8.0) (2023-12-13)
+
+
+### Features
+
+* **webstorm:** add list of settings ([ac76c90](https://github.com/VideoHexSoftware/devronomicon-tools/commit/ac76c9049cde0874b228816b22c15cf2f2fdb13e))
+
 # [0.7.0](https://github.com/VideoHexSoftware/devronomicon-tools/compare/v0.6.0...v0.7.0) (2023-12-13)
 
 
