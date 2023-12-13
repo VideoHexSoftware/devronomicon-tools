@@ -8,3 +8,4 @@ asciidoc:
 nav:
 - modules/ROOT/nav.adoc
 - modules/eslint/nav.adoc
+- modules/webstorm/nav.adoc
